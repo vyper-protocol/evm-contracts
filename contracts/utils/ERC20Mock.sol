@@ -12,19 +12,19 @@ contract ERC20Mock is ERC20 {
         _mint(initialAccount, initialBalance);
     }
 
-    function mint(address account, uint256 amount) public {
+    function mint(address account, uint256 amount) private {
         _mint(account, amount);
     }
 
-    function burn(address account, uint256 amount) public {
+    function burn(address account, uint256 amount) private {
         _burn(account, amount);
     }
 
-    function transferInternal(address from, address to, uint256 value) public {
+    function transferInternal(address from, address to, uint256 value) private {
         _transfer(from, to, value);
     }
 
-    function approveInternal(address owner, address spender, uint256 value) public {
+    function approveInternal(address owner, address spender, uint256 value) private {
         _approve(owner, spender, value);
     }
 }

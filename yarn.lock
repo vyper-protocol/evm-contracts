@@ -1211,6 +1211,11 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
+"@pwnednomore/contracts@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.npmmirror.com/@pwnednomore/contracts/-/contracts-0.3.4.tgz#3739c831cc0bf32bdae157f6ea600fc83fb4f7b1"
+  integrity sha512-evteU3n7D9D3WFoMVhMCNL0MMKVjijqeQze5qA8WKYnBnRO8VxY0QMyCUmd0Vy23aNFc3UP2TOJpJqml94ZfXA==
+
 "@scure/base@~1.1.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
