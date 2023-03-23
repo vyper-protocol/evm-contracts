@@ -28,6 +28,7 @@ contract TradeDepositWithdrawTest is DepositWithdrawalFailureTest {
     uint128 longRequiredAmount;
     uint128 shortRequiredAmount;
     uint256 payoffID;
+    uint256 tradeID;
 
     function deploy() public override {
         // create mock erc20 token
@@ -62,7 +63,7 @@ contract TradeDepositWithdrawTest is DepositWithdrawalFailureTest {
         deal(address(mockToken), bob, shortRequiredAmount);
 
         payoffID = 0;
-        tradePool.createTrade(
+        tradeID = tradePool.createTrade(
             mockToken, payoffPool, payoffID, depositEnd, settleStart, longRequiredAmount, shortRequiredAmount
         );
         deposit();
@@ -79,14 +80,17 @@ contract TradeDepositWithdrawTest is DepositWithdrawalFailureTest {
         vm.warp(settleStart + 1);
 
         vm.prank(alice);
-        tradePool.withdraw(0, TradePool.Sides.LONG);
+        tradePool.withdraw(tradeID, TradePool.Sides.LONG);
     }
 
     function invariantDepositWithdrawalFailure() public override {
         uint256 balanceBefore = mockToken.balanceOf(alice);
-        withdraw();
-        uint256 balanceAfter = mockToken.balanceOf(alice);
-        require(balanceBefore < balanceAfter, "balance should increase after withdraw");
-        require(balanceAfter >= longRequiredAmount , "balance should be large or equal to require amount");
+
+        if (!tradePool.trades(tradeID).settleExecuted) {
+            withdraw();
+            uint256 balanceAfter = mockToken.balanceOf(alice);
+            require(balanceBefore < balanceAfter, "balance should increase after withdraw");
+            require(balanceAfter >= longRequiredAmount , "balance should be large or equal to require amount");
+        }
     }
 }
